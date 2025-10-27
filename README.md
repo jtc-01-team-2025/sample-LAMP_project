@@ -52,8 +52,59 @@ project/
    brew install podman-compose
    ```
 
----
+## 事前準備（Windows）
 
+Windows 環境ではチーム方針に従い Podman を推奨します（Docker は許可されていない想定）。Podman Desktop（GUI）または WSL2 上の Podman を使ってください。
+
+1. WSL2 の確認（推奨）
+
+    - WSL2 を利用することを推奨します（ファイル共有とパフォーマンスの観点から）。WSL がインストール済みかを確認:
+
+       ```powershell
+       wsl -l -v
+       ```
+
+    - WSL2 が無い場合は Microsoft のドキュメントに従って有効化してください。
+
+2. Podman Desktop の利用（簡単）
+
+    - Windows 用の Podman Desktop をインストールすると GUI で管理できて簡単です: https://podman-desktop.io/
+
+3. WSL2（Ubuntu など）へ Podman をインストールする方法
+
+    - WSL のディストリ内で次を実行します（Ubuntu の例）:
+
+       ```bash
+       sudo apt update
+       sudo apt install -y podman podman-compose
+       podman --version
+       podman-compose --version
+       ```
+
+4. Podman Machine の初期化（必要な場合）
+
+    - 初回のみ Podman Machine を初期化します（Podman Desktop を使う場合は不要なことが多いです）:
+
+       ```bash
+       podman machine init
+       podman machine start
+       ```
+
+5. リポジトリを起動する
+
+    - WSL ターミナル（または Podman Desktop の統合ターミナル）で:
+
+       ```bash
+       podman-compose up -d
+       ```
+
+    - 起動確認や接続に問題がある場合は次を試してください:
+
+       ```bash
+       podman ps
+       podman machine inspect
+       ```
+---
 ## 起動方法
 
 1. Podman VM を起動
